@@ -19,7 +19,7 @@ To reduce the amount of code and to not reinvent the wheel the Tiny Photographer
 ### Configuration
  * `storage` is where snapshots are being stored
  * `target` is what to snapshot
- * `interval` is the inteval of snapshots deletion/"lifetime"
+ * `interval` is the interval of snapshots deletion/"lifetime"
  * `display` is how the snapshot names would look like using GNU date
 ### Example
 You make the cron run Tiny Photographer every hour and set the interval to 24. This means that if the snapshot was created today at 12:00, it will be deleted tomorrow at 12:00 if cron would run all of the 24 times. It is recommended to set multiple Tiny Photographers on different intervals.
