@@ -34,16 +34,19 @@ main() {
 	if (( $count >= $INTERVAL )); then
 		# finds the oldest modified snapshot and deletes it
 		old=$(stat -c '%n' $STORAGE* | head -1)	
-		btrfs su de $old
+		btrfs su de $old/snapshot
+		rmdir $old
 
 		# creates a new snapshot and logs actions
-		btrfs su sn $TARGET $STORAGE$time
-		btrfs pr set $STORAGE$time ro true # optionally gives it read only permissions
+		mkdir $STORAGE$time # additional directory is required to fix broken snapshot timestamps
+		btrfs su sn $TARGET $STORAGE$time/snapshot
+		btrfs pr set $STORAGE$time/snapshot ro true # optionally gives it read only permissions
 		proclog delete+create
 	else
 		# creates a new snapshot and logs actions
+		mkdir $STORAGE$time
 		btrfs su sn $TARGET $STORAGE$time
-		btrfs pr set $STORAGE$time ro true # optionally gives it read only permissions
+		btrfs pr set $STORAGE$time/snapshot ro true # optionally gives it read only permissions
 		proclog create
 	fi
 }
@@ -57,6 +60,3 @@ else
 	proclog stopped
 	exit
 fi
-
-
-
