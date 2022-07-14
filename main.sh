@@ -45,7 +45,7 @@ main() {
 	else
 		# creates a new snapshot and logs actions
 		mkdir $STORAGE$time
-		btrfs su sn $TARGET $STORAGE$time
+		btrfs su sn $TARGET $STORAGE$time/snapshot
 		btrfs pr set $STORAGE$time/snapshot ro true # optionally gives it read only permissions
 		proclog create
 	fi
