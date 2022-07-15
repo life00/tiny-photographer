@@ -33,7 +33,7 @@ main() {
 
 	if (( $count >= $INTERVAL )); then
 		# finds the oldest modified snapshot and deletes it
-		old=$(stat -c '%n' $STORAGE* | head -1)	
+		old=$(stat -c '%n' $STORAGE* | tail -1)	
 		btrfs su de $old/snapshot
 		rmdir $old
 
