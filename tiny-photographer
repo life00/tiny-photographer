@@ -34,18 +34,18 @@ main() {
 	if (( count >= INTERVAL )); then
 		# finds the oldest snapshot and deletes it
 		for f in "$STORAGE"/*/; do if [[ ! "$old" || "$f" -ot "$old" ]]; then old="$f"; fi; done		
-		btrfs su de "$old"/snapshot
+		btrfs su de "$old"/snapshot > /dev/null
 		rmdir "$old"
 
 		# creates a new snapshot and logs actions
 		mkdir "$STORAGE"/"$time" # additional directory is required to fix broken snapshot timestamps
-		btrfs su sn "$TARGET" "$STORAGE"/"$time"/snapshot
+		btrfs su sn "$TARGET" "$STORAGE"/"$time"/snapshot > /dev/null
 		btrfs pr set "$STORAGE"/"$time"/snapshot ro true # optionally gives it read only permissions
 		proclog delete+create
 	else
 		# creates a new snapshot and logs actions
 		mkdir "$STORAGE"/"$time"
-		btrfs su sn "$TARGET" "$STORAGE"/"$time"/snapshot
+		btrfs su sn "$TARGET" "$STORAGE"/"$time"/snapshot > /dev/null
 		btrfs pr set "$STORAGE"/"$time"/snapshot ro true # optionally gives it read only permissions
 		proclog create
 	fi
