@@ -7,7 +7,7 @@ TARGET=/
 # what is the interval of snapshots deletion
 INTERVAL=10
 # how the snapshot names would look like using GNU date
-DISPLAY="%Y.%m.%d-%H:%M:%S"
+DISPLAY="%Y_%m_%d-%H_%M_%S"
 
 # optional logging
 proclog() {
